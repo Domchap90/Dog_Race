@@ -108,39 +108,39 @@ class BetApp():
         
         if bettorname == 'Bill' and betnum != 0 and dognum != 0: 
             if len(self.master.grid_slaves(row=1, column=1)) < 1:
-                self.Gclass_list[0] = Guy(bettorname, betnum, dognum, self.Cash[cash1])
+                self.Gclass_list[0] = Guy(bettorname, betnum, dognum, self.Cash['cash1'])
                 self.fieldsfilled[0] = 1
                 self.Lab1 = Label(self.master, text = betlabel, bg = 'light blue',)
                 self.Lab1.grid(row = 1, column = 1)
             else:
                 #destroy old label before creating new one 
                 self.Lab1.destroy()
-                self.Gclass_list[0] = Guy(bettorname, betnum, dognum, self.Cash[cash2])
+                self.Gclass_list[0] = Guy(bettorname, betnum, dognum, self.Cash['cash1'])
                 self.Lab1 = Label(self.master, text = betlabel, bg = 'light blue',)
                 self.Lab1.grid(row = 1, column = 1)    
             
 
         elif bettorname == 'Ted' and betnum != 0 and dognum != 0:
             if len(self.master.grid_slaves(row=2, column=1)) < 1:
-                self.Gclass_list[1] = Guy(bettorname, betnum, dognum, self.Cash.cash3)
+                self.Gclass_list[1] = Guy(bettorname, betnum, dognum, self.Cash['cash2'])
                 self.Lab2 = Label(self.master, text = betlabel, bg = 'light blue',)
                 self.Lab2.grid(row = 2, column = 1)
                 self.fieldsfilled[1] = 1
             else:
                 self.Lab2.destroy()
-                self.Gclass_list[1] = Guy(bettorname, betnum, dognum)
+                self.Gclass_list[1] = Guy(bettorname, betnum, dognum,'cash2')
                 self.Lab2 = Label(self.master, text = betlabel, bg = 'light blue',)
                 self.Lab2.grid(row = 2, column = 1)
 
         elif bettorname == 'Joe' and betnum != 0 and dognum != 0:#condition type(self.betnum) is not type(float)?
             if len(self.master.grid_slaves(row=3, column=1)) < 1:
-                self.Gclass_list[2] = Guy(bettorname, betnum, dognum)
+                self.Gclass_list[2] = Guy(bettorname, betnum, dognum,self.Cash['cash3'])
                 self.Lab3 = Label(self.master, text = betlabel, bg = 'light blue',)
                 self.Lab3.grid(row = 3, column = 1)
                 self.fieldsfilled[2] = 1
             else:
                 self.Lab3.destroy()
-                self.Gclass_list[2] = Guy(bettorname, betnum, dognum)
+                self.Gclass_list[2] = Guy(bettorname, betnum, dognum,self.Cash['cash3'])
                 self.Lab3 = Label(self.master, text = betlabel, bg = 'light blue',)
                 self.Lab3.grid(row = 3, column = 1)
 
@@ -215,13 +215,16 @@ class BetApp():
                 break
             else:
                 continue
-
+                
+                
     def payout(self):
         for clss in self.Gclass_list:
             if clss.dognum == self.winner:
-                clss.cash = clss.betnum + clss.cash
+                newcash = clss.betnum + clss.cash
+                clss.cash = newcash
             else:
-                clss.cash = clss.cash - clss.betnum
+                newcash = clss.cash - clss.betnum
+                clss.cash = newcash
         self.select()
 
     def resettor(self):
