@@ -108,7 +108,7 @@ class BetApp():
         
         if bettorname == 'Bill' and betnum != 0 and dognum != 0: 
             if len(self.master.grid_slaves(row=1, column=1)) < 1:
-                self.Gclass_list[0] = Guy(bettorname, betnum, dognum, self.Cash.cash1)
+                self.Gclass_list[0] = Guy(bettorname, betnum, dognum, self.Cash[cash1])
                 self.fieldsfilled[0] = 1
                 self.Lab1 = Label(self.master, text = betlabel, bg = 'light blue',)
                 self.Lab1.grid(row = 1, column = 1)
